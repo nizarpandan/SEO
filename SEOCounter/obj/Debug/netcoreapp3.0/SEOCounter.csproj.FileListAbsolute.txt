@@ -1,0 +1,8 @@
+E:\training\SEOAnalyzer\SEOCounter\bin\Debug\netcoreapp3.0\SEOCounter.deps.json
+E:\training\SEOAnalyzer\SEOCounter\bin\Debug\netcoreapp3.0\SEOCounter.dll
+E:\training\SEOAnalyzer\SEOCounter\obj\Debug\netcoreapp3.0\SEOCounter.csprojAssemblyReference.cache
+E:\training\SEOAnalyzer\SEOCounter\obj\Debug\netcoreapp3.0\SEOCounter.AssemblyInfoInputs.cache
+E:\training\SEOAnalyzer\SEOCounter\obj\Debug\netcoreapp3.0\SEOCounter.AssemblyInfo.cs
+E:\training\SEOAnalyzer\SEOCounter\bin\Debug\netcoreapp3.0\SEOCounter.pdb
+E:\training\SEOAnalyzer\SEOCounter\obj\Debug\netcoreapp3.0\SEOCounter.dll
+E:\training\SEOAnalyzer\SEOCounter\obj\Debug\netcoreapp3.0\SEOCounter.pdb

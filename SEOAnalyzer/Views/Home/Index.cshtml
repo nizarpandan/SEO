@@ -1,0 +1,155 @@
+﻿@model SEOAnalyzer.Models.WordCounterMV
+@{
+	ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+	<h1 class="display-4">Welcome</h1>
+	<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<form method="post" name="SEOForm">
+	<input type="hidden" asp-for="IsUrl" />
+	<input type="hidden" asp-for="Url" />
+	<div class="row">
+		<div class="col-md-12">
+			<div class="form-group">
+				<label for="exampleFormControlTextarea1">Stop-words</label>
+				<textarea class="form-control" asp-for="StopWords" rows="3"></textarea>
+			</div>
+			<div class="form-check">
+				<input type="checkbox" asp-for="CheckWords" class="form-check-input">
+				<label class="form-check-label">Count the words that occured on the page</label>
+			</div>
+			<div class="form-check">
+				<input type="checkbox" asp-for="CheckMetaTags" class="form-check-input">
+				<label class="form-check-label">Count the words that listed in meta tags that occured on the page</label>
+			</div>
+			<div class="form-check">
+				<input type="checkbox" asp-for="CheckExternalLink" class="form-check-input">
+				<label class="form-check-label">Count the external link</label>
+			</div>
+
+
+			<div class="form-check">
+				<input class="form-check-input" type="radio" name="myRadios" id="cbUrl" value="true" checked>
+				<label class="form-check-label">
+					Url
+				</label>
+			</div>
+			<div class="form-check">
+				<input class="form-check-input" type="radio" name="myRadios" id="cbText" value="false">
+				<label class="form-check-label">
+					Text
+				</label>
+			</div>
+
+			<div class="form-group">
+				<label for="exampleInputEmail1">Url</label>
+				<input type="text" class="form-control" id="inputUrl" value="@ViewData["Url"]" placeholder="Enter Url" />
+				<textarea type="text" class="form-control" id="inputText" placeholder="Enter Url" value="@ViewData["Url"]"></textarea>
+			</div>
+
+			<button asp-action="Index" id="btnSubmit">
+				Click
+			</button>
+		</div>
+	</div>
+	@if (Model.CheckExternalLink)
+	{
+		<div class="row">
+			<div class="col-md-12">
+				<h3>Total External Link = @Model.TotalExternalLink</h3>
+			</div>
+		</div>
+	}
+	<div class="row">
+		<div class="col-md-6">
+			<h3>Table Words Occurrences On The Page</h3>
+			@if (Model.CheckWords && Model.Words != null)
+			{
+				<table class="table">
+					<tr>
+						<th>
+							<input type="submit" value="Words" asp-action="Index"
+								   asp-route-sortOrder="@ViewData["WordSortParam"]" />
+						</th>
+						<th>
+							<input type="submit" value="Occurences" asp-action="Index"
+								   asp-route-sortOrder="@ViewData["CountSortParam"]" />
+						</th>
+					</tr>
+					@foreach (var product in Model.Words)
+					{
+						<tr>
+							<td>@Html.DisplayFor(modelItem => product.Value)</td>
+							<td>@Html.DisplayFor(modelItem => product.Count)</td>
+						</tr>
+					}
+				</table>
+			}
+		</div>
+		<div class="col-md-6">
+			<h3>Table Word Listed In Meta Tags Occurrences On The Page</h3>
+			@if (Model.CheckMetaTags && Model.MetaTags != null)
+			{
+				<table class="table">
+					<tr>
+						<th>
+							<input type="submit" value="Words" asp-action="Index"
+								   asp-route-sortOrder="@ViewData["WordSortParam"]" />
+						</th>
+						<th>
+							<input type="submit" value="Occurences" asp-action="Index"
+								   asp-route-sortOrder="@ViewData["CountSortParam"]" />
+						</th>
+					</tr>
+					@foreach (var product in Model.MetaTags)
+					{
+						<tr>
+							<td>@Html.DisplayFor(modelItem => product.Value)</td>
+							<td>@Html.DisplayFor(modelItem => product.Count)</td>
+						</tr>
+					}
+				</table>
+			}
+		</div>
+	</div>
+</form>
+
+<script type="text/javascript">
+	(function () {
+		showInput();
+
+		var rad = document.SEOForm.myRadios;
+		for (var i = 0; i < rad.length; i++) {
+			rad[i].addEventListener('change', function() {
+				showInput();
+			});
+		}
+
+		var submit = document.getElementById('btnSubmit');
+		submit.addEventListener('click', function () {
+			if (document.getElementById('cbUrl').checked) {
+				document.getElementById('Url').value = document.getElementById('inputUrl').value;
+			}
+			else {
+				document.getElementById('Url').value = document.getElementById('inputText').value;
+			}
+		});
+
+		function showInput() {
+			if (document.getElementById('cbUrl').checked) {
+				document.getElementById('inputUrl').style.display = 'block';
+				document.getElementById('inputText').style.display = 'none';
+				document.getElementById('IsUrl').value = true;
+			}
+			else {
+				document.getElementById('inputUrl').style.display = 'none';
+				document.getElementById('inputText').style.display = 'block';
+				document.getElementById('IsUrl').value = false;
+			}
+		}
+	})();
+</script>
+
+
